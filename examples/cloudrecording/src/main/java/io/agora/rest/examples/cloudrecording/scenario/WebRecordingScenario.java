@@ -32,7 +32,7 @@ public class WebRecordingScenario extends BaseScenario {
         // acquire
         AcquireResourceRes acquireResourceRes;
         try {
-            acquireResourceRes = this.agoraService.cloudRecording()
+            acquireResourceRes = this.cloudRecordingService
                     .webScenario()
                     .acquire(cname, uid, AcquireWebRecordingResourceClientReq.builder()
                             .resourceExpiredHour(1)
@@ -56,7 +56,7 @@ public class WebRecordingScenario extends BaseScenario {
         StartResourceRes startResourceRes;
 
         try {
-            startResourceRes = this.agoraService.cloudRecording()
+            startResourceRes = this.cloudRecordingService
                     .webScenario()
                     .start(cname, uid, acquireResourceRes.getResourceId(),
                             StartWebRecordingResourceClientReq.builder()
@@ -101,7 +101,7 @@ public class WebRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryWebRecordingResourceRes queryWebRecordingResourceRes;
             try {
-                queryWebRecordingResourceRes = this.agoraService.cloudRecording()
+                queryWebRecordingResourceRes = this.cloudRecordingService
                         .webScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -129,7 +129,7 @@ public class WebRecordingScenario extends BaseScenario {
         UpdateResourceRes updateResourceRes;
 
         try {
-            updateResourceRes = this.agoraService.cloudRecording()
+            updateResourceRes = this.cloudRecordingService
                     .webScenario()
                     .update(cname, uid, acquireResourceRes.getResourceId(), startResourceRes.getSid(), UpdateWebRecordingResourceClientReq.builder()
                             .webRecordingConfig(UpdateResourceReq.WebRecordingConfig.builder()
@@ -156,7 +156,7 @@ public class WebRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryWebRecordingResourceRes queryWebRecordingResourceRes;
             try {
-                queryWebRecordingResourceRes = this.agoraService.cloudRecording()
+                queryWebRecordingResourceRes = this.cloudRecordingService
                         .webScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -182,7 +182,7 @@ public class WebRecordingScenario extends BaseScenario {
 
         StopResourceRes stopResourceRes;
         try {
-            stopResourceRes = this.agoraService.cloudRecording()
+            stopResourceRes = this.cloudRecordingService
                     .webScenario()
                     .stop(cname, uid, startResourceRes.getResourceId(), startResourceRes.getSid(), false)
                     .block();
@@ -208,7 +208,7 @@ public class WebRecordingScenario extends BaseScenario {
         // acquire
         AcquireResourceRes acquireResourceRes;
         try {
-            acquireResourceRes = this.agoraService.cloudRecording()
+            acquireResourceRes = this.cloudRecordingService
                     .webScenario()
                     .acquire(cname, uid, AcquireWebRecordingResourceClientReq.builder()
                             .resourceExpiredHour(1)
@@ -232,7 +232,7 @@ public class WebRecordingScenario extends BaseScenario {
         StartResourceRes startResourceRes;
 
         try {
-            startResourceRes = this.agoraService.cloudRecording()
+            startResourceRes = this.cloudRecordingService
                     .webScenario()
                     .start(cname, uid, acquireResourceRes.getResourceId(),
                             StartWebRecordingResourceClientReq.builder()
@@ -287,7 +287,7 @@ public class WebRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryWebRecordingResourceRes queryWebRecordingResourceRes;
             try {
-                queryWebRecordingResourceRes = this.agoraService.cloudRecording()
+                queryWebRecordingResourceRes = this.cloudRecordingService
                         .webScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -315,7 +315,7 @@ public class WebRecordingScenario extends BaseScenario {
         UpdateResourceRes updateResourceRes;
 
         try {
-            updateResourceRes = this.agoraService.cloudRecording()
+            updateResourceRes = this.cloudRecordingService
                     .webScenario()
                     .update(cname, uid, acquireResourceRes.getResourceId(), startResourceRes.getSid(), UpdateWebRecordingResourceClientReq.builder()
                             .webRecordingConfig(UpdateResourceReq.WebRecordingConfig.builder()
@@ -348,7 +348,7 @@ public class WebRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryWebRecordingResourceRes queryWebRecordingResourceRes;
             try {
-                queryWebRecordingResourceRes = this.agoraService.cloudRecording()
+                queryWebRecordingResourceRes = this.cloudRecordingService
                         .webScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -374,7 +374,7 @@ public class WebRecordingScenario extends BaseScenario {
 
         StopResourceRes stopResourceRes;
         try {
-            stopResourceRes = this.agoraService.cloudRecording()
+            stopResourceRes = this.cloudRecordingService
                     .webScenario()
                     .stop(cname, uid, startResourceRes.getResourceId(), startResourceRes.getSid(), false)
                     .block();

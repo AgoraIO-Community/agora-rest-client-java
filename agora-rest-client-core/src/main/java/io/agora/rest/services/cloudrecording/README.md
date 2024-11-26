@@ -26,7 +26,7 @@
   > ![](https://fullapp.oss-cn-beijing.aliyuncs.com/scenario_api/callapi/config/rtm_config2.jpg)  
   > ![](https://fullapp.oss-cn-beijing.aliyuncs.com/agora-rest-client/go/open_cloud_recording.png)
 
-## API V1 接口调用示例
+## API 接口调用示例
 ### 获取云端录制资源
 > 在开始云端录制之前，你需要调用 acquire 方法获取一个 Resource ID。一个 Resource ID 只能用于一次云端录制服务。
 
@@ -38,7 +38,7 @@
 - uid: 用户 UID
 - 更多 clientRequest中的参数见 [Acquire](https://doc.shengwang.cn/doc/cloud-recording/restful/cloud-recording/operations/post-v1-apps-appid-cloud_recording-acquire) 接口文档
 
-通过调用`Acquire().Do`方法来实现获取云端录制资源
+通过调用`acquire`方法来实现获取云端录制资源
 ```java
         String appId = "";
         String cname = "";
@@ -47,13 +47,20 @@
         String password = "";
 
         Credential basicAuthCredential = new BasicAuthCredential(username, password);
-        AgoraService agoraService = new AgoraService(
-                AgoraProperty.builder()
-                        .appId(appId)
-                        .credential(basicAuthCredential)
-                        .regionArea(RegionArea.CNRegionArea)
-                        .build()
-        );
+        
+        // Initialize AgoraConfig
+        AgoraConfig agoraConfig = AgoraConfig.builder()
+                .appId(appId)
+                .credential(credential)
+                // Specify the region where the server is located. 
+                // Optional values are CN, NA, EU, AP, and the client will automatically
+                // switch to use the best domain name according to the configured region
+                .regionArea(region)
+                .build();
+
+        // Initialize CloudRecordingService
+
+        CloudRecordingService cloudRecordingService = CloudRecordingService.create(agoraConfig);
 
         AcquireResourceReq acquireResourceReq = AcquireResourceReq.builder().cname(cname).uid(uid)
                 .clientRequest(AcquireResourceReq.ClientRequest.builder().scene(1)
@@ -64,7 +71,7 @@
 
         AcquireResourceRes acquireResourceRes = null;
         try {
-            acquireResourceRes = agoraService.cloudRecording().acquire(acquireResourceReq).block();
+            acquireResourceRes = cloudRecordingService.acquire(acquireResourceReq).block();
 
             assertNotNull(acquireResourceResp);
             logger.info("acquire resource response:{}", acquireResourceRes);
@@ -146,7 +153,7 @@
         StartResourceRes startResourceRes = null;
 
         try {
-            startResourceRes = agoraService.cloudRecording()
+            startResourceRes = cloudRecordingService
                     .start(resourceId,mode, startResourceReq)
                     .block();
             logger.info("start resource response:{}", startResourceRes);
@@ -184,7 +191,7 @@
 
         StopResourceRes stopResourceRes;
         try {
-            stopResourceRes = agoraService.cloudRecording()
+            stopResourceRes = cloudRecordingService
                     .stop(resourceId, sid, mode, stopResourceReq)
                     .block();
             logger.info("stop resource response:{}", stopResourceRes);
@@ -214,7 +221,7 @@
         QueryResourceRes queryResourceRes = null;
 
         try {
-            queryResourceRes = agoraService.cloudRecording()
+            queryResourceRes = cloudRecordingService
                     .query(resourceId, sid,mode)
                     .block();
 
@@ -284,7 +291,7 @@
 
         UpdateResourceRes updateResourceRes;
         try {
-            updateResourceRes = agoraService.cloudRecording()
+            updateResourceRes = cloudRecordingService
                     .update(resourceId, sid, mode, updateResourceReq)
                     .block();
             logger.info("update resource response:{}", updateResourceRes);

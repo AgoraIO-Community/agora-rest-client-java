@@ -53,8 +53,7 @@ API 接口的包装和内部实现，可以帮助开发者更加方便的集成�
 package com.company.example;
 
 import io.agora.rest.AgoraException;
-import io.agora.rest.AgoraService;
-import io.agora.rest.core.AgoraProperty;
+import io.agora.rest.core.AgoraConfig;
 import io.agora.rest.core.BasicAuthCredential;
 import io.agora.rest.core.Credential;
 import io.agora.rest.core.RegionArea;
@@ -62,6 +61,7 @@ import io.agora.rest.services.cloudrecording.api.req.StartResourceReq;
 import io.agora.rest.services.cloudrecording.api.res.AcquireResourceRes;
 import io.agora.rest.services.cloudrecording.api.res.StartResourceRes;
 import io.agora.rest.services.cloudrecording.api.res.StopResourceRes;
+import io.agora.rest.services.cloudrecording.CloudRecordingService;
 import io.agora.rest.services.cloudrecording.scenario.mix.req.AcquireMixRecordingResourceClientReq;
 import io.agora.rest.services.cloudrecording.scenario.mix.req.StartMixRecordingResourceClientReq;
 import io.agora.rest.services.cloudrecording.scenario.mix.res.QueryMixHLSAndMP4RecordingResourceRes;
@@ -94,26 +94,28 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
 
-    Credential basicAuthCredential = new BasicAuthCredential(username, password);
+    Credential credential = new BasicAuthCredential(username, password);
 
-    // Initialize AgoraService
-    AgoraService agoraService = new AgoraService(
-            AgoraProperty.builder()
-                    .appId(appId)
-                    .credential(basicAuthCredential)
-                    // Specify the region where the server is located. 
-                    // Optional values are CN, NA, EU, AP, and the client will automatically
-                    // switch to use the best domain name according to the configured region
-                    .regionArea(RegionArea.CNRegionArea)
-                    .build()
-    );
+    // Initialize AgoraConfig
+    AgoraConfig agoraConfig = AgoraConfig.builder()
+            .appId(appId)
+            .credential(credential)
+            // Specify the region where the server is located.
+            // Optional values are CN, NA, EU, AP, and the client will automatically
+            // switch to use the best domain name according to the configured region
+            .regionArea(RegionArea.CNRegionArea)
+            .build();
+
+    // Initialize CloudRecordingService
+
+    CloudRecordingService cloudRecordingService = CloudRecordingService.create(agoraConfig);
 
 
     AcquireResourceRes acquireResourceRes;
 
     // Acquire resource
     try {
-      acquireResourceRes = agoraService.cloudRecording()
+      acquireResourceRes = cloudRecordingService
               .mixScenario()
               .acquire(cname, uid, AcquireMixRecordingResourceClientReq.builder()
                       .build())
@@ -176,7 +178,7 @@ public class Main {
 
     // Start resource
     try {
-      startResourceRes = agoraService.cloudRecording()
+      startResourceRes = cloudRecordingService
               .mixScenario()
               .start(cname, uid,
                       acquireResourceRes.getResourceId(),
@@ -203,11 +205,11 @@ public class Main {
 
     Thread.sleep(3000);
 
-    QueryMixHLSAndMP4RecordingResourceRes queryResourceResp;
+    QueryMixHLSAndMP4RecordingResourceRes queryResourceRes;
 
     // Query resource
     try {
-      queryResourceRes = agoraService.cloudRecording()
+      queryResourceRes = cloudRecordingService
               .mixScenario()
               .queryHLSAndMP4(startResourceRes.getResourceId(), startResourceRes.getSid())
               .block();
@@ -220,7 +222,7 @@ public class Main {
       return;
     }
 
-    if (queryResourceRes == null || queryResourceResp.getServerResponse() == null) {
+    if (queryResourceRes == null || queryResourceRes.getServerResponse() == null) {
       System.out.println("failed to query resource");
       return;
     }
@@ -233,7 +235,7 @@ public class Main {
 
     // Stop resource
     try {
-      stopResourceRes = agoraService.cloudRecording()
+      stopResourceRes = cloudRecordingService
               .mixScenario()
               .stop(cname, uid, startResourceRes.getResourceId(), startResourceRes.getSid(),
                       true)
@@ -255,7 +257,6 @@ public class Main {
 
   }
 }
-
 
 ```
 

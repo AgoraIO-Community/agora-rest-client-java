@@ -18,7 +18,7 @@ public class StopResourceAPI {
     public Mono<StopResourceRes> handle(String resourceId, String sid, CloudRecordingModeEnum mode,
                                         StopResourceReq request) {
         String path = String.format("/v1/apps/%s/cloud_recording/resourceid/%s/sid/%s/mode/%s/stop",
-                this.context.getProperty().getAppId(), resourceId, sid, mode.getMode());
+                this.context.getAgoraConfig().getAppId(), resourceId, sid, mode.getMode());
         return this.context.sendRequest(path, HttpMethod.POST, request, StopResourceRes.class);
     }
 }

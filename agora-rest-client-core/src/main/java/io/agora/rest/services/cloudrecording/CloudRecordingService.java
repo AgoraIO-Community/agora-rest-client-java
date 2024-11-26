@@ -1,6 +1,8 @@
 package io.agora.rest.services.cloudrecording;
 
+import io.agora.rest.core.AgoraConfig;
 import io.agora.rest.core.Context;
+import io.agora.rest.core.DefaultContext;
 import io.agora.rest.services.cloudrecording.api.*;
 import io.agora.rest.services.cloudrecording.api.req.*;
 import io.agora.rest.services.cloudrecording.api.res.*;
@@ -10,7 +12,7 @@ import io.agora.rest.services.cloudrecording.scenario.mix.MixScenario;
 import io.agora.rest.services.cloudrecording.scenario.web.WebScenario;
 import reactor.core.publisher.Mono;
 
-public class CloudRecordingApi {
+public class CloudRecordingService {
 
     private final AcquireResourceAPI acquireResourceAPI;
 
@@ -28,7 +30,11 @@ public class CloudRecordingApi {
 
     private final MixScenario mixScenario;
 
-    public CloudRecordingApi(Context context) {
+    public static CloudRecordingService create(AgoraConfig agoraConfig) {
+        return new CloudRecordingService(new DefaultContext(agoraConfig));
+    }
+
+    protected CloudRecordingService(Context context) {
         this.acquireResourceAPI = new AcquireResourceAPI(context);
         this.queryResourceAPI = new QueryResourceAPI(context);
         this.startResourceAPI = new StartResourceAPI(context);

@@ -1,6 +1,6 @@
 package io.agora.rest.core;
 
-public class AgoraProperty {
+public class AgoraConfig {
     private final String appId;
 
     private final Credential credential;
@@ -9,7 +9,7 @@ public class AgoraProperty {
 
     private final HttpProperty httpProperty;
 
-    private AgoraProperty(Builder builder) {
+    private AgoraConfig(Builder builder) {
         this.appId = builder.appId;
         this.credential = builder.credential;
         this.regionArea = builder.regionArea;
@@ -38,7 +38,7 @@ public class AgoraProperty {
 
     @Override
     public String toString() {
-        return "AgoraProperty{" +
+        return "AgoraConfig{" +
                 "appId='" + appId + '\'' +
                 ", credential=" + credential +
                 ", regionArea=" + regionArea +
@@ -79,11 +79,11 @@ public class AgoraProperty {
             return this;
         }
 
-        public AgoraProperty build() {
+        public AgoraConfig build() {
             if (httpProperty == null) {
                 this.httpProperty = HttpProperty.builder().build();
             }
-            return new AgoraProperty(this);
+            return new AgoraConfig(this);
         }
     }
 }

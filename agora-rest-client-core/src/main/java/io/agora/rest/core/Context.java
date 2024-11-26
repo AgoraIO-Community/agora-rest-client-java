@@ -7,5 +7,5 @@ public interface Context {
 
     <T> Mono<T> sendRequest(String path, HttpMethod method, Object requestBody, Class<T> clazz);
 
-    AgoraProperty getProperty();
+    AgoraConfig getAgoraConfig();
 }

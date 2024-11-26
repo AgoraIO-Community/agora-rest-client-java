@@ -30,7 +30,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         // acquire
         AcquireResourceRes acquireResourceRes;
         try {
-            acquireResourceRes = this.agoraService.cloudRecording()
+            acquireResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .acquire(cname, uid, false, AcquireIndividualResourceClientReq.builder()
                             .resourceExpiredHour(1)
@@ -55,7 +55,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         StartResourceRes startResourceRes;
 
         try {
-            startResourceRes = this.agoraService.cloudRecording()
+            startResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .start(cname, uid, acquireResourceRes.getResourceId(), StartIndividualRecordingClientReq.builder()
                             .token(token)
@@ -92,7 +92,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryIndividualRecordingResourceRes queryIndividualRecordingResourceRes;
             try {
-                queryIndividualRecordingResourceRes = this.agoraService.cloudRecording()
+                queryIndividualRecordingResourceRes = this.cloudRecordingService
                         .individualScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -120,7 +120,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         UpdateResourceRes updateResourceRes;
 
         try {
-            updateResourceRes = this.agoraService.cloudRecording()
+            updateResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .update(cname, uid, acquireResourceRes.getResourceId(), startResourceRes.getSid(), UpdateIndividualRecordingResourceClientReq.builder()
                             .streamSubscribe(UpdateResourceReq.StreamSubscribe.builder()
@@ -153,7 +153,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryIndividualRecordingResourceRes queryIndividualRecordingResourceRes;
             try {
-                queryIndividualRecordingResourceRes = this.agoraService.cloudRecording()
+                queryIndividualRecordingResourceRes = this.cloudRecordingService
                         .individualScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -179,7 +179,7 @@ public class IndividualRecordingScenario extends BaseScenario {
 
         StopResourceRes stopResourceRes;
         try {
-            stopResourceRes = this.agoraService.cloudRecording()
+            stopResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .stop(cname, uid, startResourceRes.getResourceId(), startResourceRes.getSid(), false)
                     .block();
@@ -205,7 +205,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         // acquire
         AcquireResourceRes acquireResourceRes;
         try {
-            acquireResourceRes = this.agoraService.cloudRecording()
+            acquireResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .acquire(cname, uid, false, AcquireIndividualResourceClientReq.builder()
                             .resourceExpiredHour(1)
@@ -229,7 +229,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         StartResourceRes startResourceRes;
 
         try {
-            startResourceRes = this.agoraService.cloudRecording()
+            startResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .start(cname, uid, acquireResourceRes.getResourceId(), StartIndividualRecordingClientReq.builder()
                             .token(token)
@@ -267,7 +267,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryIndividualRecordingVideoScreenshotResourceRes queryIndividualRecordingVideoScreenshotResourceRes;
             try {
-                queryIndividualRecordingVideoScreenshotResourceRes = this.agoraService.cloudRecording()
+                queryIndividualRecordingVideoScreenshotResourceRes = this.cloudRecordingService
                         .individualScenario()
                         .queryVideoScreenshot(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -295,7 +295,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         UpdateResourceRes updateResourceRes;
 
         try {
-            updateResourceRes = this.agoraService.cloudRecording()
+            updateResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .update(cname, uid, acquireResourceRes.getResourceId(), startResourceRes.getSid(), UpdateIndividualRecordingResourceClientReq.builder()
                             .streamSubscribe(UpdateResourceReq.StreamSubscribe.builder()
@@ -328,7 +328,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryIndividualRecordingVideoScreenshotResourceRes queryIndividualRecordingVideoScreenshotResourceRes;
             try {
-                queryIndividualRecordingVideoScreenshotResourceRes = this.agoraService.cloudRecording()
+                queryIndividualRecordingVideoScreenshotResourceRes = this.cloudRecordingService
                         .individualScenario()
                         .queryVideoScreenshot(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -354,7 +354,7 @@ public class IndividualRecordingScenario extends BaseScenario {
 
         StopResourceRes stopResourceRes;
         try {
-            stopResourceRes = this.agoraService.cloudRecording()
+            stopResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .stop(cname, uid, startResourceRes.getResourceId(), startResourceRes.getSid(), false)
                     .block();
@@ -380,7 +380,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         // acquire
         AcquireResourceRes acquireResourceRes;
         try {
-            acquireResourceRes = this.agoraService.cloudRecording()
+            acquireResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .acquire(cname, uid, false, AcquireIndividualResourceClientReq.builder()
                             .resourceExpiredHour(1)
@@ -404,7 +404,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         StartResourceRes startResourceRes;
 
         try {
-            startResourceRes = this.agoraService.cloudRecording()
+            startResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .start(cname, uid, acquireResourceRes.getResourceId(), StartIndividualRecordingClientReq.builder()
                             .token(token)
@@ -445,7 +445,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryIndividualRecordingResourceRes queryIndividualRecordingResourceRes;
             try {
-                queryIndividualRecordingResourceRes = this.agoraService.cloudRecording()
+                queryIndividualRecordingResourceRes = this.cloudRecordingService
                         .individualScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -473,7 +473,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         UpdateResourceRes updateResourceRes;
 
         try {
-            updateResourceRes = this.agoraService.cloudRecording()
+            updateResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .update(cname, uid, acquireResourceRes.getResourceId(), startResourceRes.getSid(), UpdateIndividualRecordingResourceClientReq.builder()
                             .streamSubscribe(UpdateResourceReq.StreamSubscribe.builder()
@@ -506,7 +506,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryIndividualRecordingResourceRes queryIndividualRecordingResourceRes;
             try {
-                queryIndividualRecordingResourceRes = this.agoraService.cloudRecording()
+                queryIndividualRecordingResourceRes = this.cloudRecordingService
                         .individualScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -532,7 +532,7 @@ public class IndividualRecordingScenario extends BaseScenario {
 
         StopResourceRes stopResourceRes;
         try {
-            stopResourceRes = this.agoraService.cloudRecording()
+            stopResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .stop(cname, uid, startResourceRes.getResourceId(), startResourceRes.getSid(), false)
                     .block();
@@ -558,7 +558,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         // acquire
         AcquireResourceRes acquireResourceRes;
         try {
-            acquireResourceRes = this.agoraService.cloudRecording()
+            acquireResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .acquire(cname, uid, true, AcquireIndividualResourceClientReq.builder()
                             .resourceExpiredHour(1)
@@ -582,7 +582,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         StartResourceRes startResourceRes;
 
         try {
-            startResourceRes = this.agoraService.cloudRecording()
+            startResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .start(cname, uid, acquireResourceRes.getResourceId(), StartIndividualRecordingClientReq.builder()
                             .token(token)
@@ -630,7 +630,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryIndividualRecordingResourceRes queryIndividualRecordingResourceRes;
             try {
-                queryIndividualRecordingResourceRes = this.agoraService.cloudRecording()
+                queryIndividualRecordingResourceRes = this.cloudRecordingService
                         .individualScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -658,7 +658,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         UpdateResourceRes updateResourceRes;
 
         try {
-            updateResourceRes = this.agoraService.cloudRecording()
+            updateResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .update(cname, uid, acquireResourceRes.getResourceId(), startResourceRes.getSid(), UpdateIndividualRecordingResourceClientReq.builder()
                             .streamSubscribe(UpdateResourceReq.StreamSubscribe.builder()
@@ -691,7 +691,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryIndividualRecordingResourceRes queryIndividualRecordingResourceRes;
             try {
-                queryIndividualRecordingResourceRes = this.agoraService.cloudRecording()
+                queryIndividualRecordingResourceRes = this.cloudRecordingService
                         .individualScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -717,7 +717,7 @@ public class IndividualRecordingScenario extends BaseScenario {
 
         StopResourceRes stopResourceRes;
         try {
-            stopResourceRes = this.agoraService.cloudRecording()
+            stopResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .stop(cname, uid, startResourceRes.getResourceId(), startResourceRes.getSid(), false)
                     .block();
@@ -743,7 +743,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         // acquire
         AcquireResourceRes acquireResourceRes;
         try {
-            acquireResourceRes = this.agoraService.cloudRecording()
+            acquireResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .acquire(cname, uid, true, AcquireIndividualResourceClientReq.builder()
                             .resourceExpiredHour(1)
@@ -767,7 +767,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         StartResourceRes startResourceRes;
 
         try {
-            startResourceRes = this.agoraService.cloudRecording()
+            startResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .start(cname, uid, acquireResourceRes.getResourceId(), StartIndividualRecordingClientReq.builder()
                             .token(token)
@@ -820,7 +820,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryIndividualRecordingResourceRes queryIndividualRecordingResourceRes;
             try {
-                queryIndividualRecordingResourceRes = this.agoraService.cloudRecording()
+                queryIndividualRecordingResourceRes = this.cloudRecordingService
                         .individualScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -848,7 +848,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         UpdateResourceRes updateResourceRes;
 
         try {
-            updateResourceRes = this.agoraService.cloudRecording()
+            updateResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .update(cname, uid, acquireResourceRes.getResourceId(), startResourceRes.getSid(), UpdateIndividualRecordingResourceClientReq.builder()
                             .streamSubscribe(UpdateResourceReq.StreamSubscribe.builder()
@@ -877,7 +877,7 @@ public class IndividualRecordingScenario extends BaseScenario {
         for (int i = 0; i < 3; i++) {
             QueryIndividualRecordingResourceRes queryIndividualRecordingResourceRes;
             try {
-                queryIndividualRecordingResourceRes = this.agoraService.cloudRecording()
+                queryIndividualRecordingResourceRes = this.cloudRecordingService
                         .individualScenario()
                         .query(acquireResourceRes.getResourceId(), startResourceRes.getSid())
                         .block();
@@ -903,7 +903,7 @@ public class IndividualRecordingScenario extends BaseScenario {
 
         StopResourceRes stopResourceRes;
         try {
-            stopResourceRes = this.agoraService.cloudRecording()
+            stopResourceRes = this.cloudRecordingService
                     .individualScenario()
                     .stop(cname, uid, startResourceRes.getResourceId(), startResourceRes.getSid(), false)
                     .block();

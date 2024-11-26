@@ -1,9 +1,9 @@
 package io.agora.rest.examples.cloudrecording.scenario;
 
-import io.agora.rest.AgoraService;
-import io.agora.rest.core.AgoraProperty;
+import io.agora.rest.core.AgoraConfig;
 import io.agora.rest.core.Credential;
 import io.agora.rest.core.RegionArea;
+import io.agora.rest.services.cloudrecording.CloudRecordingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +21,7 @@ public class BaseScenario {
 
     protected final Credential credential;
 
-    protected final AgoraService agoraService;
+    protected final CloudRecordingService cloudRecordingService;
 
     public BaseScenario(RegionArea region, String appId, String cname, String uid, Credential credential) {
         this.region = region;
@@ -30,14 +30,14 @@ public class BaseScenario {
         this.uid = uid;
         this.credential = credential;
 
-        AgoraProperty agoraProperty = AgoraProperty.builder()
+        AgoraConfig agoraConfig = AgoraConfig.builder()
                 .appId(appId)
                 .credential(credential)
                 .regionArea(region)
                 .build();
 
-        logger.info("AgoraProperty: {}", agoraProperty);
+        logger.info("AgoraConfig: {}", agoraConfig);
 
-        this.agoraService = new AgoraService(agoraProperty);
+        this.cloudRecordingService = CloudRecordingService.create(agoraConfig);
     }
 }
