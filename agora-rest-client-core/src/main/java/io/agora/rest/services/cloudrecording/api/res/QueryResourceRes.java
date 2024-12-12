@@ -360,6 +360,14 @@ public class QueryResourceRes {
         public void setSliceStartTime(Long sliceStartTime) {
             this.sliceStartTime = sliceStartTime;
         }
+
+        @Override
+        public String toString() {
+            return "QueryIndividualVideoScreenshotServerResponse{" +
+                    "status=" + status +
+                    ", sliceStartTime=" + sliceStartTime +
+                    '}';
+        }
     }
 
     public static class MixRecordingHLSServerResponse {

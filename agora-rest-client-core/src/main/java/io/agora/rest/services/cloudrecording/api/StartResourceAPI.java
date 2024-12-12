@@ -30,7 +30,7 @@ public class StartResourceAPI {
 
     public Mono<StartResourceRes> handle(String resourceId, CloudRecordingModeEnum mode, StartResourceReq request) {
         String path = String.format("/v1/apps/%s/cloud_recording/resourceid/%s/mode/%s/start",
-                this.context.getProperty().getAppId(), resourceId, mode.getMode());
+                this.context.getAgoraConfig().getAppId(), resourceId, mode.getMode());
 
         return this.context.sendRequest(path, HttpMethod.POST, request, StartResourceRes.class)
                 .retryWhen(customRetry(MAX_ATTEMPTS, e -> e instanceof AgoraNeedRetryException));

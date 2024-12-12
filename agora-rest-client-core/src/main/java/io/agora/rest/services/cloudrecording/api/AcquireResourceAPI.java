@@ -16,7 +16,7 @@ public class AcquireResourceAPI {
 
     public Mono<AcquireResourceRes> handle(AcquireResourceReq request) {
         String path = String.format("/v1/apps/%s/cloud_recording/acquire",
-                this.context.getProperty().getAppId());
+                this.context.getAgoraConfig().getAppId());
         return this.context.sendRequest(path, HttpMethod.POST, request, AcquireResourceRes.class);
     }
 }

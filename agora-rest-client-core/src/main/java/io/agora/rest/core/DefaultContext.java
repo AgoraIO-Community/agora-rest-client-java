@@ -16,7 +16,7 @@ public class DefaultContext implements Context {
 
     private static final Logger logger = LoggerFactory.getLogger(DefaultContext.class);
 
-    private final AgoraProperty property;
+    private final AgoraConfig agoraConfig;
 
     private final HttpClient httpClient;
 
@@ -24,10 +24,10 @@ public class DefaultContext implements Context {
 
     private final DomainPool domainPool;
 
-    public DefaultContext(AgoraProperty property) {
-        this.property = property;
-        this.httpClient = HttpClientFactory.createHttpClient(property);
-        this.domainPool = new DomainPool(property.getRegionArea());
+    public DefaultContext(AgoraConfig agoraConfig) {
+        this.agoraConfig = agoraConfig;
+        this.httpClient = HttpClientFactory.createHttpClient(agoraConfig);
+        this.domainPool = new DomainPool(agoraConfig.getRegionArea());
         this.codec = new JsonCodec();
     }
 
@@ -73,7 +73,7 @@ public class DefaultContext implements Context {
     }
 
     @Override
-    public AgoraProperty getProperty() {
-        return this.property;
+    public AgoraConfig getAgoraConfig() {
+        return this.agoraConfig;
     }
 }

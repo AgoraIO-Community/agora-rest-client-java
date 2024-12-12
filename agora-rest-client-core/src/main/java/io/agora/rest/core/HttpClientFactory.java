@@ -13,14 +13,14 @@ public class HttpClientFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpClientFactory.class);
 
-    public static HttpClient createHttpClient(AgoraProperty agoraProperty) {
+    public static HttpClient createHttpClient(AgoraConfig agoraConfig) {
         ConnectionProvider connectionProvider = ConnectionProvider.builder("agora-rest-client")
-                .maxConnections(agoraProperty.getHttpProperty().getHttpConnectionPoolSize())
-                .pendingAcquireTimeout(Duration.ofMillis(agoraProperty.getHttpProperty().getHttpConnectionPendingAcquireTimout()))
-                .maxIdleTime(Duration.ofMillis(agoraProperty.getHttpProperty().getHttpConnectionMaxIdleTime()))
-                .maxLifeTime(Duration.ofMillis(agoraProperty.getHttpProperty().getHttpConnectionMaxLifeTime()))
-                .evictInBackground(Duration.ofMillis(agoraProperty.getHttpProperty().getHttpConnectionEvictInBackground()))
-                .pendingAcquireMaxCount(agoraProperty.getHttpProperty().getHttpConnectionPendingAcquireMaxCount())
+                .maxConnections(agoraConfig.getHttpProperty().getHttpConnectionPoolSize())
+                .pendingAcquireTimeout(Duration.ofMillis(agoraConfig.getHttpProperty().getHttpConnectionPendingAcquireTimout()))
+                .maxIdleTime(Duration.ofMillis(agoraConfig.getHttpProperty().getHttpConnectionMaxIdleTime()))
+                .maxLifeTime(Duration.ofMillis(agoraConfig.getHttpProperty().getHttpConnectionMaxLifeTime()))
+                .evictInBackground(Duration.ofMillis(agoraConfig.getHttpProperty().getHttpConnectionEvictInBackground()))
+                .pendingAcquireMaxCount(agoraConfig.getHttpProperty().getHttpConnectionPendingAcquireMaxCount())
                 .lifo()
                 .build();
 
@@ -32,11 +32,11 @@ public class HttpClientFactory {
                             System.getProperty("os.arch"),
                             System.getProperty("os.name"),
                             AgoraVersion.getVersion()));
-                    if (agoraProperty.getCredential() != null) {
-                        agoraProperty.getCredential().setAuthorization(h);
+                    if (agoraConfig.getCredential() != null) {
+                        agoraConfig.getCredential().setAuthorization(h);
                     }
                 })
-                .wiretap("io.agora.rest.core.http", LogLevel.DEBUG, agoraProperty.getHttpProperty().getHttpLogFormat())
+                .wiretap("io.agora.rest.core.http", LogLevel.DEBUG, agoraConfig.getHttpProperty().getHttpLogFormat())
                 .doOnRequestError((req, t) -> logger.error("request error:{}", t.getMessage()));
 
     }

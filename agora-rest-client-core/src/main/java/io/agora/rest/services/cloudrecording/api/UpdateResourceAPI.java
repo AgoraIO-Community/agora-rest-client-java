@@ -20,7 +20,7 @@ public class UpdateResourceAPI {
     public Mono<UpdateResourceRes> handle(String resourceId, String sid, CloudRecordingModeEnum mode,
                                           UpdateResourceReq request) {
         String path = String.format("/v1/apps/%s/cloud_recording/resourceid/%s/sid/%s/mode/%s/update",
-                this.context.getProperty().getAppId(),
+                this.context.getAgoraConfig().getAppId(),
                 resourceId,
                 sid,
                 mode.getMode());
@@ -30,7 +30,7 @@ public class UpdateResourceAPI {
     public Mono<UpdateLayoutResourceRes> handleLayout(String resourceId, String sid, CloudRecordingModeEnum mode,
                                                       UpdateLayoutResourceReq request) {
         String path = String.format("/v1/apps/%s/cloud_recording/resourceid/%s/sid/%s/mode/%s/updateLayout",
-                this.context.getProperty().getAppId(),
+                this.context.getAgoraConfig().getAppId(),
                 resourceId,
                 sid,
                 mode.getMode());

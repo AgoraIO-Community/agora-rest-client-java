@@ -21,7 +21,7 @@ public class QueryResourceAPI {
 
     public Mono<QueryResourceRes> handle(String resourceId, String sid, CloudRecordingModeEnum mode) {
         String path = String.format("/v1/apps/%s/cloud_recording/resourceid/%s/sid/%s/mode/%s/query",
-                this.context.getProperty().getAppId(), resourceId, sid, mode.getMode());
+                this.context.getAgoraConfig().getAppId(), resourceId, sid, mode.getMode());
         return this.context.sendRequest(path, HttpMethod.GET, null, QueryResourceRes.class)
                 .handle((resp, sink) -> {
                     try {
