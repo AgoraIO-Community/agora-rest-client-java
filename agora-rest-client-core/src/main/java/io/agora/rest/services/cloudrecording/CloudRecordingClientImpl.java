@@ -31,18 +31,24 @@ public class CloudRecordingClientImpl extends CloudRecordingClient {
 
     private final MixScenario mixScenario;
 
+    private final static Integer MAX_ATTEMPTS = 3;
+
+    private final static String pathPrefix = "/v1/apps/%s/cloud_recording";
+
     protected CloudRecordingClientImpl(Context context) {
-        this.acquireResourceAPI = new AcquireResourceAPI(context);
-        this.queryResourceAPI = new QueryResourceAPI(context);
-        this.startResourceAPI = new StartResourceAPI(context);
-        this.stopResourceAPI = new StopResourceAPI(context);
-        this.updateResourceAPI = new UpdateResourceAPI(context);
+        this.acquireResourceAPI = new AcquireResourceAPI(context, pathPrefix, MAX_ATTEMPTS);
+        this.queryResourceAPI = new QueryResourceAPI(context, pathPrefix, MAX_ATTEMPTS);
+        this.startResourceAPI = new StartResourceAPI(context, pathPrefix, MAX_ATTEMPTS);
+        this.stopResourceAPI = new StopResourceAPI(context, pathPrefix, MAX_ATTEMPTS);
+        this.updateResourceAPI = new UpdateResourceAPI(context, pathPrefix, MAX_ATTEMPTS);
 
         this.individualScenario = new IndividualScenarioImpl(acquireResourceAPI, queryResourceAPI, startResourceAPI,
                 updateResourceAPI, stopResourceAPI);
-        this.webScenario = new WebScenarioImpl(acquireResourceAPI, queryResourceAPI, startResourceAPI, updateResourceAPI,
+        this.webScenario = new WebScenarioImpl(acquireResourceAPI, queryResourceAPI, startResourceAPI,
+                updateResourceAPI,
                 stopResourceAPI);
-        this.mixScenario = new MixScenarioImpl(acquireResourceAPI, queryResourceAPI, startResourceAPI, updateResourceAPI,
+        this.mixScenario = new MixScenarioImpl(acquireResourceAPI, queryResourceAPI, startResourceAPI,
+                updateResourceAPI,
                 stopResourceAPI);
     }
 
@@ -59,17 +65,17 @@ public class CloudRecordingClientImpl extends CloudRecordingClient {
     }
 
     public Mono<StopResourceRes> stop(String resourceId, String sid, CloudRecordingModeEnum mode,
-                                      StopResourceReq request) {
+            StopResourceReq request) {
         return stopResourceAPI.handle(resourceId, sid, mode, request);
     }
 
     public Mono<UpdateResourceRes> update(String resourceId, String sid, CloudRecordingModeEnum mode,
-                                          UpdateResourceReq request) {
+            UpdateResourceReq request) {
         return updateResourceAPI.handle(resourceId, sid, mode, request);
     }
 
     public Mono<UpdateLayoutResourceRes> updateLayout(String resourceId, String sid, CloudRecordingModeEnum mode,
-                                                      UpdateLayoutResourceReq request) {
+            UpdateLayoutResourceReq request) {
         return updateResourceAPI.handleLayout(resourceId, sid, mode, request);
     }
 

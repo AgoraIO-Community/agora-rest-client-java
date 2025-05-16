@@ -38,16 +38,18 @@ public class ConvoAIClientImpl extends ConvoAIClient {
 
     private final static String globalPrefixTpl = "/api/conversational-ai-agent/v2/projects/%s";
 
+    private final static Integer MAX_ATTEMPTS = 3;
+
     protected ConvoAIClientImpl(Context context, ConvoAIServiceRegionEnum serviceRegionEnum) {
         String pathPrefix = getPathPrefix(context, serviceRegionEnum);
-        joinConvoAIAPI = new JoinConvoAIAPI(context, pathPrefix);
-        leaveConvoAIAPI = new LeaveConvoAIAPI(context, pathPrefix);
-        listConvoAIAPI = new ListConvoAIAPI(context, pathPrefix);
-        queryConvoAIAPI = new QueryConvoAIAPI(context, pathPrefix);
-        updateConvoAIAPI = new UpdateConvoAIAPI(context, pathPrefix);
-        historyConvoAIAPI = new HistoryConvoAIAPI(context, pathPrefix);
-        interruptConvoAIAPI = new InterruptConvoAIAPI(context, pathPrefix);
-        speakConvoAIAPI = new SpeakConvoAIAPI(context, pathPrefix);
+        joinConvoAIAPI = new JoinConvoAIAPI(context, pathPrefix, MAX_ATTEMPTS);
+        leaveConvoAIAPI = new LeaveConvoAIAPI(context, pathPrefix, MAX_ATTEMPTS);
+        listConvoAIAPI = new ListConvoAIAPI(context, pathPrefix, MAX_ATTEMPTS);
+        queryConvoAIAPI = new QueryConvoAIAPI(context, pathPrefix, MAX_ATTEMPTS);
+        updateConvoAIAPI = new UpdateConvoAIAPI(context, pathPrefix, MAX_ATTEMPTS);
+        historyConvoAIAPI = new HistoryConvoAIAPI(context, pathPrefix, MAX_ATTEMPTS);
+        interruptConvoAIAPI = new InterruptConvoAIAPI(context, pathPrefix, MAX_ATTEMPTS);
+        speakConvoAIAPI = new SpeakConvoAIAPI(context, pathPrefix, MAX_ATTEMPTS);
     }
 
     private String getPathPrefix(Context context, ConvoAIServiceRegionEnum serviceRegionEnum) {
